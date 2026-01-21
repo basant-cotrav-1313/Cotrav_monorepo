@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+
+    "baseUrl": ".",
+    "paths": {
+      "@cotrav/errors": ["../../packages/errors/dist"],
+      "@cotrav/logger": ["../../packages/logger/dist"],
+      "@cotrav/middlewares": ["../../packages/middlewares/dist"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

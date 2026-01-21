@@ -1,0 +1,28 @@
+{
+  "name": "cotrav-services",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+   "build": "npm run build --workspaces --if-present",
+
+  "clean": "rimraf packages/**/dist services/**/dist",
+
+  "dev:auth": "npm run dev --workspace=services/auth-service",
+
+  "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "rimraf": "^5.0.5",
+    "@types/node": "^20.11.17",
+    "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
