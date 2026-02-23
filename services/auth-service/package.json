@@ -6,10 +6,13 @@
   "type": "commonjs",
    "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+     "build": "tsc -p tsconfig.json",
+    "start": "node dist/app.js"
   },
   "dependencies": {
+    "@cotrav/logger": "workspace:*",
+    "@cotrav/errors": "workspace:*",
+    "@cotrav/middlewares": "workspace:*",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
@@ -20,9 +23,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "@cotrav/errors": "file:../../packages/errors",
-    "@cotrav/logger": "file:../../packages/logger",
-    "@cotrav/middlewares": "file:../../packages/middlewares",
+  
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",

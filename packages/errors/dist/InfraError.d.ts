@@ -1,4 +1,5 @@
-import { AppError } from "./AppError";
-export declare class InfraError extends AppError {
-    constructor(message: string, code?: string);
+import { BaseError } from "./BaseError";
+export declare class InfraError extends BaseError {
+    constructor(message: string, errorCode?: string, statusCode?: number);
 }
+//# sourceMappingURL=InfraError.d.ts.map

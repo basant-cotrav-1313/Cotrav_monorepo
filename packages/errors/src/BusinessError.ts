@@ -1,6 +1,11 @@
-import { AppError } from "./AppError";
-export class BusinessError extends AppError {
-  constructor(message: string, code = "BUSINESS_ERROR", status = 409) {
-    super(message, status, code);
+import { BaseError } from "./BaseError";
+
+export class BusinessError extends BaseError {
+  constructor(
+    message: string, 
+    errorCode: "BUSINESS_ERROR",
+    statusCode = 409
+  ) {
+    super(message, statusCode, errorCode, true);
   }
 }

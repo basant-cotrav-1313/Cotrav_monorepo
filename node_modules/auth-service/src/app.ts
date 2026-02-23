@@ -1,14 +1,15 @@
+import "./bootstrap/env";
 
-import dotenv from "dotenv";
-dotenv.config();
+//import dotenv from "dotenv";
+//dotenv.config();
 
 
-import  {logger } from "@cotrav/logger";
+import logger from "@cotrav/logger";
 
 import express, { Request, Response, NextFunction } from "express";
 const app = express();
 import authRoutes from "./api/routes/authRoutes";
-import * as middlewares  from "@cotrav/middlewares";
+import * as middlewares from "@cotrav/middlewares";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./infrastructure/http/swagger";
 import testRoutes from "./api/routes/testRoutes";

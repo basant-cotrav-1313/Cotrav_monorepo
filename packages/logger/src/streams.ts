@@ -1,12 +1,12 @@
 // src/infrastructure/logger/streams.ts
 import fs from "fs";
 import path from "path";
-import pino from "pino";
+import pino, { Level, type StreamEntry } from "pino";
 
 const serviceName = process.env.SERVICE_NAME || "auth-service";
 const baseLogDir = process.env.LOG_DIR || path.join(process.cwd(), "logs");
 
-function createStream(level: string) {
+function createStream(level: Level): StreamEntry {
   const logDir = path.join(baseLogDir, serviceName, level);
   fs.mkdirSync(logDir, { recursive: true });
 
@@ -24,7 +24,7 @@ function createStream(level: string) {
   };
 }
 
-export const streams = [
+export const streams: StreamEntry[] = [
   createStream("info"),
   createStream("error"),
   createStream("debug"),

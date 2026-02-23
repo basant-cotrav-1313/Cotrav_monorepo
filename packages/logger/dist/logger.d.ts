@@ -1,3 +1,4 @@
-import pino from "pino";
-declare const logger: pino.Logger<never, boolean>;
-export { logger };
+import { Logger } from "pino";
+declare const logger: Logger;
+export default logger;
+//# sourceMappingURL=logger.d.ts.map

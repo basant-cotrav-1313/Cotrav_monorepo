@@ -1,10 +1,11 @@
-export abstract class AppError extends Error {
+import { BaseError } from "./BaseError";
+
+export class AppError extends BaseError {
   constructor(
-    public message: string,
-    public statusCode: number,
-    public errorCode: string,
-    public isOperational = true
+    message: string, 
+    errorCode: "APP_ERROR",
+    statusCode = 400
   ) {
-    super(message);
+    super(message, statusCode, errorCode, true);
   }
 }

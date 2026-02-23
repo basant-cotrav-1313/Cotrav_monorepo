@@ -7,20 +7,21 @@
     "services/*"
   ],
   "scripts": {
-   "build": "npm run build --workspaces --if-present",
-
-  "clean": "rimraf packages/**/dist services/**/dist",
-
-  "dev:auth": "npm run dev --workspace=services/auth-service",
-
-  "typecheck": "tsc -b"
+    "build:packages": "npm run build --workspaces --if-present",
+    "build:services": "npm run build --workspaces --if-present",
+    "build": "npm run build:packages && npm run build:services",
+    "clean": "rimraf --glob \"packages/**/dist\" \"services/**/dist\"",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
-    "ts-node": "^10.9.2",
-    "rimraf": "^5.0.5",
     "@types/node": "^20.11.17",
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "rimraf": "^5.0.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,23 +1,38 @@
+import { BaseError, InfraError } from "@cotrav/errors";
+import logger from "@cotrav/logger";
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "@cotrav/errors";
-import { logger } from "@cotrav/logger";
 
- const errorHandler = (err: Error, req: Request, res: Response, _next: NextFunction) => {
-  if (err instanceof AppError) {
-    logger.warn({ err }, "Handled application error");
+ function errorHandler(
+  err: unknown,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) {
+  // Narrow unknown → BaseError
+  if (err instanceof BaseError) {
+    if (err instanceof InfraError) {
+      logger.fatal({ err }, "Infrastructure error");
+    } else {
+      logger.error({ err }, "Application/Business error");
+    }
+
     return res.status(err.statusCode).json({
-      success: false,
       errorCode: err.errorCode,
       message: err.message
     });
   }
 
-  logger.error({ err }, "Unhandled system error");
-  res.status(500).json({
-    success: false,
+  // Narrow unknown → Error
+  if (err instanceof Error) {
+    logger.fatal({ err }, "Unhandled Error");
+  } else {
+    logger.fatal({ err }, "Unknown throwable");
+  }
+
+  return res.status(500).json({
     errorCode: "INTERNAL_ERROR",
     message: "Something went wrong"
   });
-};
+}
 
 export default errorHandler;

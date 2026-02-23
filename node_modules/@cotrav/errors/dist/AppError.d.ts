@@ -1,7 +1,5 @@
-export declare abstract class AppError extends Error {
-    message: string;
-    statusCode: number;
-    errorCode: string;
-    isOperational: boolean;
-    constructor(message: string, statusCode: number, errorCode: string, isOperational?: boolean);
+import { BaseError } from "./BaseError";
+export declare class AppError extends BaseError {
+    constructor(message: string, errorCode: "APP_ERROR", statusCode?: number);
 }
+//# sourceMappingURL=AppError.d.ts.map

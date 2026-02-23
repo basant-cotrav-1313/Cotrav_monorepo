@@ -10,7 +10,7 @@ export const register = async (req: Request, res: Response) => {
     const user = await authService.register(req.body);
     res.json(user);
   } catch (err: any) {
-    logger.logger.error(err.message);
+    logger.error(err.message);
     res.status(400).json({ error: err.message });
   }
 };
@@ -20,7 +20,7 @@ export const login = async (req: Request, res: Response) => {
     const token = await authService.login(req.body);
     res.json(token);
   } catch (err: any) {
-    logger.logger.error(err.message);
+    logger.error(err.message);
     res.status(401).json({ error: err.message });
   }
 };

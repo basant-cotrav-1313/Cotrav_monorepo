@@ -1,11 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+   "outDir": "dist",
     "rootDir": "src",
-    "outDir": "dist",
-
-    "baseUrl": ".",
+    "module": "CommonJS",
+    "target": "ES2020",
+    "declaration": false,
+    "sourceMap": true,
+    "noEmit": false,
     "paths": {
+      "@cotrav/*": ["../../packages/*/src"],
       "@cotrav/errors": ["../../packages/errors/dist"],
       "@cotrav/logger": ["../../packages/logger/dist"],
       "@cotrav/middlewares": ["../../packages/middlewares/dist"]

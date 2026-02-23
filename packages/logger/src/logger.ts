@@ -1,5 +1,5 @@
 // src/infrastructure/logger/logger.ts
-import pino from "pino";
+import pino, { Logger } from "pino";
 import { streams } from "./streams";
 
 console.log("LOG_DIR in logger.ts:", process.env.LOG_DIR);
@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV === "production";
 
 console.log("isDev in logger.ts:", isDev);
 
-const logger = pino(
+const logger: Logger = pino(
   {
     level: process.env.LOG_LEVEL || "info",
     base: {
@@ -25,4 +25,4 @@ const logger = pino(
     : pino.multistream(streams)
 );
 
-export { logger };
+export default logger;

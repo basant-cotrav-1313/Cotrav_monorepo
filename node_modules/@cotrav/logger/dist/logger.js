@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logger = void 0;
 // src/infrastructure/logger/logger.ts
 const pino_1 = __importDefault(require("pino"));
 const streams_1 = require("./streams");
@@ -24,4 +23,4 @@ const logger = (0, pino_1.default)({
         options: { colorize: true }
     })
     : pino_1.default.multistream(streams_1.streams));
-exports.logger = logger;
+exports.default = logger;

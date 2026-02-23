@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "composite": true,
-    "declaration": true,
-    "module": "CommonJS",
     "target": "ES2020",
-    "moduleResolution": "node",
+    "module": "CommonJS",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts"]
 }
