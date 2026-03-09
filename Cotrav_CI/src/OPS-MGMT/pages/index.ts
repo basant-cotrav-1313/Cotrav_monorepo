@@ -1,0 +1,12 @@
+export { default as OpsMgmtLoginPage } from "./Login";
+export { default as OpsMgmtDashboardPage } from "./Dashboard";
+export { default as OpsMgmtTaxiDashboardPage } from "./TaxiDashboard";
+export { default as OpsMgmtBusDashboardPage } from "./BusDashboard";
+export { default as OpsMgmtTrainDashboardPage } from "./TrainDashboard";
+export { default as OpsMgmtHotelDashboardPage } from "./HotelDashboard";
+export { default as OpsMgmtFlightDashboardPage } from "./FlightDashboard";
+export { default as OpsMgmtFlightAnalyticsPage } from "./FlightAnalytics";
+export { default as OpsMgmtProfilePage } from "./Profile";
+export { default as OpsMgmtAdvancedSearchResultsPage } from "./AdvancedSearchResults";
+export { default as OpsMgmtBillsDashboardPage } from "./BillsDashboard";
+export { default as OpsMgmtVoucherDashboardPage } from "./VoucherDashboard";

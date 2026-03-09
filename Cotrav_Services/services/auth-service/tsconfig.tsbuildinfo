@@ -1,0 +1,1 @@
+{"root":["./src/app.ts","./src/test-require.ts","./src/api/controllers/authcontroller.ts","./src/api/routes/authroutes.ts","./src/api/routes/testroutes.ts","./src/domain/services/authservice.ts","./src/infrastructure/http/swagger.ts"],"version":"5.9.3"}

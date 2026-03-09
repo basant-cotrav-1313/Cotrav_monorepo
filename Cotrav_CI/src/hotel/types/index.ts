@@ -1,0 +1,5 @@
+export * from './hotel'
+export * from './form.types'
+export * from './people'
+export * from './hotelDetail.types'
+// export * from './booking.types'
