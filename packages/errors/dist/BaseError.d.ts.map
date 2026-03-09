@@ -1,1 +1,0 @@
-{"version":3,"file":"BaseError.d.ts","sourceRoot":"","sources":["../src/BaseError.ts"],"names":[],"mappings":"AAAA,8BAAsB,SAAU,SAAQ,KAAK;IAC3C,SAAgB,UAAU,EAAE,MAAM,CAAC;IACnC,SAAgB,SAAS,EAAE,MAAM,CAAC;IAClC,SAAgB,aAAa,EAAE,OAAO,CAAC;IAEvC,SAAS,aACP,OAAO,EAAE,MAAM,EACf,UAAU,EAAE,MAAM,EAClB,SAAS,EAAE,MAAM,EACjB,aAAa,UAAO;CAUvB"}
