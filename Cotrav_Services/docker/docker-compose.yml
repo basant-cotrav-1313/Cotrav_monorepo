@@ -14,3 +14,16 @@ services:
       - ../services/auth-service/.env
     environment:
       KEYCLOAK_BASE_URL: http://host.docker.internal:8080
+
+  flight-service:
+    image: cotrav-flight-service
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.service
+      args:
+        SERVICE_NAME: flight-service
+        PORT: 4002
+    ports:
+      - "4002:4002"
+    env_file:
+      - ../services/flight-service/.env
