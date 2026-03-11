@@ -94,45 +94,49 @@ const Flight: React.FC = () => {
           <CompanyDropdown onSelect={() => {}} />
         </div>
 
-        <div className="p-4 border-r lg:col-span-2">
-          <p className="text-[10px] font-medium text-gray-500">FROM</p>
-          <input
-            type="text"
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
-            placeholder="Enter city"
-            className="text-sm font-medium text-gray-900 w-full focus:outline-none"
-          />
-          {showOriginError && (
-            <p className="text-xs text-red-600 mt-1">Please select Origin</p>
-          )}
-        </div>
-
-        {bookingType === "return" && (
-          <div className="p-4 border-r lg:col-span-1 flex items-center justify-center">
+        {/* FROM field with relative positioning for swap button */}
+        <div className="lg:col-span-2 border-r relative">
+          <div className="p-4">
+            <p className="text-[10px] font-medium text-gray-500">FROM</p>
+            <input
+              type="text"
+              value={origin}
+              onChange={(e) => setOrigin(e.target.value)}
+              placeholder="Pune (PNQ) Pune Airp"
+              className="text-sm font-medium text-gray-900 w-full focus:outline-none"
+            />
+            {showOriginError && (
+              <p className="text-xs text-red-600 mt-1">Please select Origin</p>
+            )}
+          </div>
+          
+          {/* Swap button positioned between FROM and TO */}
+          {bookingType === "return" && (
             <button
               type="button"
               onClick={swapLocations}
-              className="h-9 w-9 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-50"
+              className="absolute -right-5 top-1/2 transform -translate-y-1/2 z-10 h-9 w-9 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 shadow-sm"
               aria-label="Swap origin and destination"
             >
               ⇄
             </button>
-          </div>
-        )}
-
-        <div className="p-4 border-r lg:col-span-2">
-          <p className="text-[10px] font-medium text-gray-500">TO</p>
-          <input
-            type="text"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            placeholder="Enter city"
-            className="text-sm font-medium text-gray-900 w-full focus:outline-none"
-          />
-          {showDestinationError && (
-            <p className="text-xs text-red-600 mt-1">Please select Destination</p>
           )}
+        </div>
+
+        <div className="lg:col-span-2 border-r">
+          <div className="p-4">
+            <p className="text-[10px] font-medium text-gray-500">TO</p>
+            <input
+              type="text"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              placeholder="Singapore (QPG) Paya"
+              className="text-sm font-medium text-gray-900 w-full focus:outline-none"
+            />
+            {showDestinationError && (
+              <p className="text-xs text-red-600 mt-1">Please select Destination</p>
+            )}
+          </div>
         </div>
 
         <div className="lg:col-span-2 border-r">
@@ -165,7 +169,7 @@ const Flight: React.FC = () => {
           )}
         </div>
 
-        <div className="p-4 lg:col-span-3 relative">
+        <div className="lg:col-span-2 border-r relative">
           <p className="text-[10px] font-medium text-gray-500">TRAVELLERS & CLASS</p>
           <button
             type="button"
@@ -174,7 +178,6 @@ const Flight: React.FC = () => {
           >
             {travellersSummary}
           </button>
-
           {travellersOpen && (
             <div className="absolute left-0 right-0 top-full mt-2 z-40 bg-white border border-slate-200 rounded-xl shadow-xl p-4">
               <div className="space-y-3">
@@ -223,7 +226,6 @@ const Flight: React.FC = () => {
               </div>
             </div>
           )}
-
           {exceedsPassengerLimit && (
             <p className="text-xs text-red-600 mt-1">Please select maximum 9 passenger</p>
           )}
@@ -241,6 +243,7 @@ const Flight: React.FC = () => {
         >
           SEARCH
         </button>
+        
       </div>
     </div>
   );
