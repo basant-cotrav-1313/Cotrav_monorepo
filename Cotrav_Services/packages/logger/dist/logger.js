@@ -6,10 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // src/infrastructure/logger/logger.ts
 const pino_1 = __importDefault(require("pino"));
 const streams_1 = require("./streams");
-console.log("LOG_DIR in logger.ts:", process.env.LOG_DIR);
-console.log("NODE_ENV in logger.ts:", process.env.NODE_ENV);
 const isDev = process.env.NODE_ENV === "production";
-console.log("isDev in logger.ts:", isDev);
 const logger = (0, pino_1.default)({
     level: process.env.LOG_LEVEL || "info",
     base: {

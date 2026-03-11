@@ -1,7 +1,7 @@
 import request from "supertest";
 import express from "express";
 import companyRoutes from "../api/routes/companyRoutes";
-import * as companyRepository from "../domain/repositories/companyRepository";
+import * as companyRepository from "../infrastructure/db/repositories/companyRepository";
 import * as middlewares from "@cotrav/middlewares";
 
 // Mock DB pool so service doesn't need a real DB
@@ -9,7 +9,7 @@ jest.mock("../infrastructure/db/connection", () => ({
   query: jest.fn(),
 }));
 
-jest.mock("../domain/repositories/companyRepository");
+jest.mock("../infrastructure/db/repositories/companyRepository");
 
 const mockGetCompanies = companyRepository.getCompanies as jest.MockedFunction<
   typeof companyRepository.getCompanies

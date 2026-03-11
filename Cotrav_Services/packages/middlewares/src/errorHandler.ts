@@ -11,10 +11,11 @@ import { Request, Response, NextFunction } from "express";
   // Narrow unknown → BaseError
   if (err instanceof BaseError) {
     if (err instanceof InfraError) {
-      logger.fatal({ err }, "Infrastructure error");
+      logger.error({ err }, "Infrastructure error");
     } else {
       logger.error({ err }, "Application/Business error");
     }
+    logger.flush();
 
     return res.status(err.statusCode).json({
       errorCode: err.errorCode,
@@ -24,10 +25,11 @@ import { Request, Response, NextFunction } from "express";
 
   // Narrow unknown → Error
   if (err instanceof Error) {
-    logger.fatal({ err }, "Unhandled Error");
+    logger.error({ err }, "Unhandled Error");
   } else {
-    logger.fatal({ err }, "Unknown throwable");
+    logger.error({ err }, "Unknown throwable");
   }
+  logger.flush();
 
   return res.status(500).json({
     errorCode: "INTERNAL_ERROR",

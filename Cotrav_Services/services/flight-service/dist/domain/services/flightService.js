@@ -32,11 +32,28 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCompanies = getCompanies;
-const companyRepository = __importStar(require("../../infrastructure/db/repositories/companyRepository"));
-async function getCompanies(_req, res) {
-    const companies = await companyRepository.getCompanies();
-    res.json(companies);
+exports.getAllFlights = getAllFlights;
+exports.getFlightById = getFlightById;
+const errors_1 = require("@cotrav/errors");
+const logger_1 = __importDefault(require("@cotrav/logger"));
+const flightRepository = __importStar(require("../../infrastructure/db/repositories/flightRepository"));
+const flight_dto_1 = require("../dtos/flight.dto");
+async function getAllFlights() {
+    logger_1.default.info({ layer: "service", fn: "getAllFlights" }, "Fetching all flights");
+    const rows = await flightRepository.getAllFlights();
+    return rows.map(flight_dto_1.toFlightResponse);
 }
-//# sourceMappingURL=companyController.js.map
+async function getFlightById(rawId) {
+    logger_1.default.info({ layer: "service", fn: "getFlightById", rawId }, "Fetching flight by ID");
+    const dto = flight_dto_1.FlightByIdRequest.validate(rawId); // DTO handles validation + AppError(400)
+    const flight = await flightRepository.getFlightById(dto.id);
+    if (!flight) {
+        throw new errors_1.AppError("Flight not found", "APP_ERROR", 404);
+    }
+    return (0, flight_dto_1.toFlightResponse)(flight);
+}
+//# sourceMappingURL=flightService.js.map

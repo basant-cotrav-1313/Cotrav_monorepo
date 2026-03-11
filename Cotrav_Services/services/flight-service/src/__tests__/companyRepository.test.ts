@@ -1,4 +1,5 @@
-import * as companyRepository from "../domain/repositories/companyRepository";
+import * as companyRepository from "../infrastructure/db/repositories/companyRepository";
+import { InfraError } from "@cotrav/errors";
 
 // Mock the DB pool
 jest.mock("../infrastructure/db/connection", () => ({
@@ -36,13 +37,14 @@ describe("companyRepository", () => {
       expect(result).toEqual([]);
     });
 
-    it("throws when DB query fails", async () => {
+    it("throws InfraError when DB query fails", async () => {
       (mockPool.query as jest.Mock).mockRejectedValueOnce(
         new Error("DB connection error")
       );
 
+      await expect(companyRepository.getCompanies()).rejects.toThrow(InfraError);
       await expect(companyRepository.getCompanies()).rejects.toThrow(
-        "DB connection error"
+        "Failed to fetch companies from database"
       );
     });
   });

@@ -36,6 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const logger_1 = __importDefault(require("@cotrav/logger"));
 const express_1 = __importDefault(require("express"));
 const middlewares = __importStar(require("@cotrav/middlewares"));
@@ -85,11 +86,13 @@ const PORT = process.env.PORT || 4002;
     .then(() => {
     logger_1.default.info("Database connection successful");
     app.listen(PORT, () => {
+        console.log(`Flight service running on port ${PORT}`);
         logger_1.default.info({ port: PORT, service: "flight-service" }, "Flight service listening");
     });
 })
     .catch((err) => {
     logger_1.default.error({ err }, "Database connection failed");
+    logger_1.default.flush();
     process.exit(1);
 });
 exports.default = app;

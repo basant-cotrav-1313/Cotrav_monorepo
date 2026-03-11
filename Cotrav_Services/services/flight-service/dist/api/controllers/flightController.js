@@ -35,17 +35,13 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFlights = getFlights;
 exports.getFlightById = getFlightById;
-const flightRepository = __importStar(require("../../domain/repositories/flightRepository"));
+const flightService = __importStar(require("../../domain/services/flightService"));
 async function getFlights(_req, res) {
-    const flights = await flightRepository.getAllFlights();
+    const flights = await flightService.getAllFlights();
     res.json(flights);
 }
 async function getFlightById(req, res) {
-    const flight = await flightRepository.getFlightById(Number(req.params.id));
-    if (!flight) {
-        res.status(404).json({ message: "Flight not found" });
-        return;
-    }
+    const flight = await flightService.getFlightById(req.params.id);
     res.json(flight);
 }
 //# sourceMappingURL=flightController.js.map

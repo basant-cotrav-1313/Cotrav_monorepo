@@ -1,0 +1,4 @@
+{"level":30,"time":"2026-03-11T06:54:24.444Z","service":"flight-service","env":"development","layer":"service","fn":"getFlightById","rawId":"-1","msg":"Fetching flight by ID"}
+{"level":30,"time":"2026-03-11T06:57:17.216Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-11T06:57:17.221Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-11T06:57:18.687Z","service":"flight-service","env":"development","layer":"service","fn":"getFlightById","rawId":"-1","msg":"Fetching flight by ID"}

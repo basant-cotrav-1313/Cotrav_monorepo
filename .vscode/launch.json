@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to flight-service",
+      "port": 9229,
+      "remoteRoot": "${workspaceFolder}/Cotrav_Services/services/flight-service",
+      "localRoot": "${workspaceFolder}/Cotrav_Services/services/flight-service",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

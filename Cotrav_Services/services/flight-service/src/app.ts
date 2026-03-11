@@ -1,3 +1,4 @@
+import "dotenv/config";
 import logger from "@cotrav/logger";
 import express, { Request, Response } from "express";
 import * as middlewares from "@cotrav/middlewares";
@@ -60,11 +61,13 @@ testConnection()
   .then(() => {
     logger.info("Database connection successful");
     app.listen(PORT, () => {
+      console.log(`Flight service running on port ${PORT}`);
       logger.info({ port: PORT, service: "flight-service" }, "Flight service listening");
     });
   })
   .catch((err) => {
     logger.error({ err }, "Database connection failed");
+    logger.flush();
     process.exit(1);
   });
 
