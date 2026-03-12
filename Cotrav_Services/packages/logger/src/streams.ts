@@ -10,8 +10,6 @@ const LEVEL_NUMBERS: Record<string, number> = {
 const serviceName = process.env.SERVICE_NAME || "auth-service";
 const baseLogDir = path.resolve(process.env.LOG_DIR || path.join(process.cwd(), "logs"));
 
-process.stderr.write(`[streams] log dir: ${baseLogDir}\n`);
-
 const logPaths: Record<string, string> = {};
 
 (["debug", "info", "warn", "error"] as Level[]).forEach((level) => {

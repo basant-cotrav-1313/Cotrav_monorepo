@@ -7,12 +7,13 @@ import { testConnection } from "./infrastructure/db/connection";
 import { swaggerSpec } from "./infrastructure/http/swagger";
 import cityRoutes from "./api/routes/cityRoutes";
 
+
 const app = express();
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "*");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-correlation-id");
 
   if (req.method === "OPTIONS") {
     res.sendStatus(204);
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-
+app.use(middlewares.correlationId);
 app.use("/getAllCities", cityRoutes);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

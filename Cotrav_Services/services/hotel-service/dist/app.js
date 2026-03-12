@@ -48,7 +48,7 @@ const app = (0, express_1.default)();
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "*");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-correlation-id");
     if (req.method === "OPTIONS") {
         res.sendStatus(204);
         return;
@@ -56,6 +56,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express_1.default.json());
+app.use(middlewares.correlationId);
 app.use("/getAllCities", cityRoutes_1.default);
 app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.swaggerSpec));
 app.get("/health", middlewares.asyncHandler(async (_req, res) => {

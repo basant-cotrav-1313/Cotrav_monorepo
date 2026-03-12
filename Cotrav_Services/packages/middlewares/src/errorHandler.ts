@@ -2,36 +2,32 @@ import { BaseError, InfraError } from "@cotrav/errors";
 import logger from "@cotrav/logger";
 import { Request, Response, NextFunction } from "express";
 
- function errorHandler(
+function errorHandler(
   err: unknown,
   req: Request,
   res: Response,
   _next: NextFunction
 ) {
   // Narrow unknown → BaseError
+  const correlationId = req.correlationId;
+
   if (err instanceof BaseError) {
     if (err instanceof InfraError) {
-      logger.error({ err }, "Infrastructure error");
-    } else if (err.statusCode >= 500) {
-      logger.error({ err }, "Application/Business error");
+      logger.error({ err, correlationId }, "Infrastructure error");
     } else {
-      logger.warn({ err }, "Application/Business error");
+      logger.error({ err, correlationId }, "Application/Business error");
     }
     logger.flush();
 
     return res.status(err.statusCode).json({
       errorCode: err.errorCode,
       message: err.message,
-      correlationId: req.correlationId
+      correlationId
     });
   }
 
   // Narrow unknown → Error
-  if (err instanceof Error) {
-    logger.error({ err }, "Unhandled Error");
-  } else {
-    logger.warn({ err }, "Unknown throwable");
-  }
+  logger.error({ err, correlationId }, err instanceof Error ? "Unhandled Error" : "Unknown throwable");
   logger.flush();
 
   return res.status(500).json({

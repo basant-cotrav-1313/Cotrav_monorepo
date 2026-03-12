@@ -35,8 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCities = getCities;
 const cityRepository = __importStar(require("../../infrastructure/db/repositories/cityRepository"));
-async function getCities(_req, res) {
+async function getCities(req, res) {
     const cities = await cityRepository.getCities();
-    res.json(cities);
+    res.json({ correlationId: req.correlationId, data: cities });
 }
 //# sourceMappingURL=cityController.js.map

@@ -12,7 +12,6 @@ const LEVEL_NUMBERS = {
 };
 const serviceName = process.env.SERVICE_NAME || "auth-service";
 const baseLogDir = path_1.default.resolve(process.env.LOG_DIR || path_1.default.join(process.cwd(), "logs"));
-process.stderr.write(`[streams] log dir: ${baseLogDir}\n`);
 const logPaths = {};
 ["debug", "info", "warn", "error"].forEach((level) => {
     const logDir = path_1.default.join(baseLogDir, serviceName, level);
