@@ -1,0 +1,1 @@
+{"version":3,"file":"airportController.js","sourceRoot":"","sources":["../../../src/api/controllers/airportController.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,kCAGC;AALD,0GAA4F;AAErF,KAAK,UAAU,WAAW,CAAC,IAAa,EAAE,GAAa;IAC5D,MAAM,QAAQ,GAAG,MAAM,iBAAiB,CAAC,WAAW,EAAE,CAAC;IACvD,GAAG,CAAC,IAAI,CAAC,QAAQ,CAAC,CAAC;AACrB,CAAC"}

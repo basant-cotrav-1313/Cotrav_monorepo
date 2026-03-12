@@ -6,6 +6,8 @@ export const ENV = {
     "https://demo.taxivaxi.com/api/flights/employeeByTaxivaxi",
   FLIGHT_BASE_URL:
     import.meta.env.VITE_FLIGHT_BASE_URL ?? "http://localhost:4002",
+  HOTEL_BASE_URL:
+    import.meta.env.VITE_HOTEL_BASE_URL ?? "http://localhost:4003",
 } as const;
 
 if (!import.meta.env.VITE_API_BASE_URL || !import.meta.env.VITE_CORE_BASE_URL) {

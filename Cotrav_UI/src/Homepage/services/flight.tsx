@@ -1,14 +1,16 @@
 import { useMemo, useState } from "react";
 import CompanyDropdown from "../components/CompanyDropdown";
 import DatePickerBox from "../components/DatePickerBox";
+import AirportSelector, { FlightAirport } from "../components/AirportSelector";
+import { useFlightCities } from "@/common/hooks/useFlightCities";
 
 type BookingType = "one-way" | "return";
 type CabinClass = "Economy class" | "Premium economy" | "Business class" | "First class";
 
 const Flight: React.FC = () => {
   const [bookingType, setBookingType] = useState<BookingType>("one-way");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
+  const [origin, setOrigin] = useState<FlightAirport | null>(null);
+  const [destination, setDestination] = useState<FlightAirport | null>(null);
   const [departureDate, setDepartureDate] = useState<Date | null>(new Date());
   const [returnDate, setReturnDate] = useState<Date | null>(null);
   const [travellersOpen, setTravellersOpen] = useState(false);
@@ -20,13 +22,15 @@ const Flight: React.FC = () => {
   });
   const [touched, setTouched] = useState(false);
 
+  const { airports, loading } = useFlightCities();
+
   const today = new Date();
   const totalTravellers = travellerCounts.adults + travellerCounts.children + travellerCounts.infants;
   const infantsMoreThanAdults = travellerCounts.infants > travellerCounts.adults;
   const exceedsPassengerLimit = totalTravellers > 9;
 
-  const showOriginError = touched && !origin.trim();
-  const showDestinationError = touched && !destination.trim();
+  const showOriginError = touched && !origin;
+  const showDestinationError = touched && !destination;
   const showDepartureError = touched && !departureDate;
   const showReturnError = touched && bookingType === "return" && !returnDate;
   const canSearch =
@@ -52,15 +56,15 @@ const Flight: React.FC = () => {
   };
 
   const swapLocations = () => {
+    const temp = origin;
     setOrigin(destination);
-    setDestination(origin);
+    setDestination(temp);
   };
 
   const handleSearch = () => {
     setTouched(true);
     if (!canSearch) return;
     // TODO: wire to search endpoint/navigation when flight search flow is finalized.
-    // Keeping this non-destructive for now to restore form behavior and validation.
   };
 
   return (
@@ -94,17 +98,16 @@ const Flight: React.FC = () => {
           <CompanyDropdown onSelect={() => {}} />
         </div>
 
-        <div className="p-4 border-r lg:col-span-2">
-          <p className="text-[10px] font-medium text-gray-500">FROM</p>
-          <input
-            type="text"
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
-            placeholder="Enter city"
-            className="text-sm font-medium text-gray-900 w-full focus:outline-none"
+        <div className="lg:col-span-2 border-r">
+          <AirportSelector
+            label="FROM"
+            airport={origin}
+            setAirport={setOrigin}
+            airports={airports}
+            loading={loading}
           />
           {showOriginError && (
-            <p className="text-xs text-red-600 mt-1">Please select Origin</p>
+            <p className="text-xs text-red-600 px-4 pb-2">Please select Origin</p>
           )}
         </div>
 
@@ -121,17 +124,16 @@ const Flight: React.FC = () => {
           </div>
         )}
 
-        <div className="p-4 border-r lg:col-span-2">
-          <p className="text-[10px] font-medium text-gray-500">TO</p>
-          <input
-            type="text"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            placeholder="Enter city"
-            className="text-sm font-medium text-gray-900 w-full focus:outline-none"
+        <div className="lg:col-span-2 border-r">
+          <AirportSelector
+            label="TO"
+            airport={destination}
+            setAirport={setDestination}
+            airports={airports}
+            loading={loading}
           />
           {showDestinationError && (
-            <p className="text-xs text-red-600 mt-1">Please select Destination</p>
+            <p className="text-xs text-red-600 px-4 pb-2">Please select Destination</p>
           )}
         </div>
 

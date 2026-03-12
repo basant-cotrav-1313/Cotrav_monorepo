@@ -7,6 +7,7 @@ import { testConnection } from "./infrastructure/db/connection";
 import { swaggerSpec } from "./infrastructure/http/swagger";
 import flightRoutes from "./api/routes/flightRoutes";
 import companyRoutes from "./api/routes/companyRoutes";
+import airportRoutes from "./api/routes/airportRoutes";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(express.json());
 
 app.use("/flights", flightRoutes);
 app.use("/companies", companyRoutes);
+app.use("/airports", airportRoutes);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**

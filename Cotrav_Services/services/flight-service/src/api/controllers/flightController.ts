@@ -10,3 +10,4 @@ export async function getFlightById(req: Request, res: Response): Promise<void> 
   const flight = await flightService.getFlightById(req.params.id);
   res.json(flight);
 }
+

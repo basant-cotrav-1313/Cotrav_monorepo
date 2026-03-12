@@ -45,6 +45,7 @@ const connection_1 = require("./infrastructure/db/connection");
 const swagger_1 = require("./infrastructure/http/swagger");
 const flightRoutes_1 = __importDefault(require("./api/routes/flightRoutes"));
 const companyRoutes_1 = __importDefault(require("./api/routes/companyRoutes"));
+const airportRoutes_1 = __importDefault(require("./api/routes/airportRoutes"));
 const app = (0, express_1.default)();
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN || "*");
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 app.use(express_1.default.json());
 app.use("/flights", flightRoutes_1.default);
 app.use("/companies", companyRoutes_1.default);
+app.use("/airports", airportRoutes_1.default);
 app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.swaggerSpec));
 /**
  * @openapi

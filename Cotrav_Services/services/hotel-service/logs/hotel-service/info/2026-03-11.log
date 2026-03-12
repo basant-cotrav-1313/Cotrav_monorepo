@@ -1,0 +1,14 @@
+{"level":30,"time":"2026-03-11T11:52:18.361Z","service":"hotel-service","env":"development","port":"4003","service":"hotel-service","msg":"Hotel service listening"}
+{"level":30,"time":"2026-03-11T11:56:03.467Z","service":"hotel-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-11T11:56:03.469Z","service":"hotel-service","env":"development","port":"4003","service":"hotel-service","msg":"Hotel service listening"}
+{"level":30,"time":"2026-03-11T11:56:11.683Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:00:36.616Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:00:36.727Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:02:25.152Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:02:25.407Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:03:17.781Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:03:17.853Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:18:10.884Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T12:18:10.992Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T13:04:44.045Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}
+{"level":30,"time":"2026-03-11T13:04:44.075Z","service":"hotel-service","env":"development","layer":"repository","fn":"getCities","count":1210,"msg":"Cities fetched successfully"}

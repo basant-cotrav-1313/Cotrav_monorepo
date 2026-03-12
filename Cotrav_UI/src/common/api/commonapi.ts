@@ -14,3 +14,8 @@ export const getCities = async () => {
     throw error;
   }
 };
+
+export const getFlightCities = async () => {
+  const response = await flightAxios.get("/airports");
+  return response.data;
+};

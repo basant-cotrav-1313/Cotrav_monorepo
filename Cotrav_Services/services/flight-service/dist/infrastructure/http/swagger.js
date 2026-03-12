@@ -21,7 +21,31 @@ const options = {
             },
         ],
     },
-    apis: [path_1.default.join(__dirname, "../../api/routes/*.{ts,js}")],
+    apis: [
+        path_1.default.join(__dirname, "../../api/routes/*.ts"),
+        path_1.default.join(__dirname, "../../api/routes/*.js"),
+    ],
 };
-exports.swaggerSpec = (0, swagger_jsdoc_1.default)(options);
+const spec = (0, swagger_jsdoc_1.default)(options);
+// Manually inject /airports path — ensures it always appears in Swagger
+spec.paths = spec.paths || {};
+spec.paths["/airports"] = {
+    get: {
+        summary: "Get all airports",
+        description: "Returns a list of all airports available for flight search.",
+        tags: ["Airports"],
+        responses: {
+            200: {
+                description: "List of airports",
+                content: {
+                    "application/json": {
+                        schema: { type: "array", items: { type: "object" } },
+                    },
+                },
+            },
+            500: { description: "Internal server error" },
+        },
+    },
+};
+exports.swaggerSpec = spec;
 //# sourceMappingURL=swagger.js.map
