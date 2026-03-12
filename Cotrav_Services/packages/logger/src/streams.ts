@@ -8,7 +8,9 @@ const LEVEL_NUMBERS: Record<string, number> = {
 };
 
 const serviceName = process.env.SERVICE_NAME || "auth-service";
-const baseLogDir = process.env.LOG_DIR || path.join(process.cwd(), "logs");
+const baseLogDir = path.resolve(process.env.LOG_DIR || path.join(process.cwd(), "logs"));
+
+process.stderr.write(`[streams] log dir: ${baseLogDir}\n`);
 
 const logPaths: Record<string, string> = {};
 
@@ -25,11 +27,11 @@ const routerStream = {
       const levelName = Object.keys(LEVEL_NUMBERS).find(
         (k) => LEVEL_NUMBERS[k] === log.level
       );
-if (levelName && logPaths[levelName]) {
+      if (levelName && logPaths[levelName]) {
         fs.appendFileSync(logPaths[levelName], msg);
       }
     } catch (e) {
-      console.log("[streams] parse error:", e);
+      process.stderr.write(`[streams] write error: ${e}\n`);
     }
   }
 };

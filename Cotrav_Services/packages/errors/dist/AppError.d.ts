@@ -1,5 +1,5 @@
 import { BaseError } from "./BaseError";
 export declare class AppError extends BaseError {
-    constructor(message: string, errorCode: "APP_ERROR", statusCode?: number);
+    constructor(message: string, errorCode?: string, statusCode?: number);
 }
 //# sourceMappingURL=AppError.d.ts.map

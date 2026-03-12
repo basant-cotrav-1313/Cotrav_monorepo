@@ -11,7 +11,8 @@ const LEVEL_NUMBERS = {
     trace: 10, debug: 20, info: 30, warn: 40, error: 50, fatal: 60
 };
 const serviceName = process.env.SERVICE_NAME || "auth-service";
-const baseLogDir = process.env.LOG_DIR || path_1.default.join(process.cwd(), "logs");
+const baseLogDir = path_1.default.resolve(process.env.LOG_DIR || path_1.default.join(process.cwd(), "logs"));
+process.stderr.write(`[streams] log dir: ${baseLogDir}\n`);
 const logPaths = {};
 ["debug", "info", "warn", "error"].forEach((level) => {
     const logDir = path_1.default.join(baseLogDir, serviceName, level);
@@ -28,7 +29,7 @@ const routerStream = {
             }
         }
         catch (e) {
-            console.log("[streams] parse error:", e);
+            process.stderr.write(`[streams] write error: ${e}\n`);
         }
     }
 };

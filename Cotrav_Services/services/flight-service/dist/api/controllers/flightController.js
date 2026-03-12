@@ -35,7 +35,9 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFlights = getFlights;
 exports.getFlightById = getFlightById;
+exports.assignBooking = assignBooking;
 const flightService = __importStar(require("../../domain/services/flightService"));
+const bookingService = __importStar(require("../../domain/services/bookingService"));
 async function getFlights(_req, res) {
     const flights = await flightService.getAllFlights();
     res.json(flights);
@@ -43,5 +45,10 @@ async function getFlights(_req, res) {
 async function getFlightById(req, res) {
     const flight = await flightService.getFlightById(req.params.id);
     res.json(flight);
+}
+async function assignBooking(req, res) {
+    const authId = Number(req["authId"] ?? 0);
+    const result = await bookingService.assignFlightBooking(req.body, authId);
+    res.status(200).json(result);
 }
 //# sourceMappingURL=flightController.js.map

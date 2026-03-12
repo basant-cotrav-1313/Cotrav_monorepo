@@ -8,12 +8,12 @@
    "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@cotrav/errors": "file:../errors",
+    "@cotrav/logger": "file:../logger",
     "express": "^5.2.1",
     "pino": "^10.1.0"
   },
   "devDependencies": {
-    "@cotrav/errors": "file:../errors",
-  "@cotrav/logger": "file:../logger",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.9"
   }

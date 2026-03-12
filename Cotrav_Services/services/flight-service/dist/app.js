@@ -58,6 +58,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express_1.default.json());
+app.use(middlewares.correlationId);
 app.use("/flights", flightRoutes_1.default);
 app.use("/companies", companyRoutes_1.default);
 app.use("/airports", airportRoutes_1.default);

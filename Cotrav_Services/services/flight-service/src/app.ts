@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+app.use(middlewares.correlationId);
 
 app.use("/flights", flightRoutes);
 app.use("/companies", companyRoutes);

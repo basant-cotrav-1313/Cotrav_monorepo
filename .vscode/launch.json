@@ -1,14 +1,44 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
     {
       "type": "node",
       "request": "attach",
       "name": "Attach to flight-service",
       "port": 9229,
-      "remoteRoot": "${workspaceFolder}/Cotrav_Services/services/flight-service",
       "localRoot": "${workspaceFolder}/Cotrav_Services/services/flight-service",
-      "skipFiles": ["<node_internals>/**"]
+      "remoteRoot": "${workspaceFolder}/Cotrav_Services/services/flight-service",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "../../*": "${workspaceFolder}/Cotrav_Services/*"
+      },
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch flight-service",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect=0.0.0.0:9229",
+        "-r",
+        "tsx/cjs"
+      ],
+      "args": ["src/app.ts"],
+      "cwd": "${workspaceFolder}/Cotrav_Services/services/flight-service",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "../../*": "${workspaceFolder}/Cotrav_Services/*"
+      },
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "outFiles": [
+        "${workspaceFolder}/Cotrav_Services/services/flight-service/dist/**/*.js"
+      ]
     }
   ]
 }

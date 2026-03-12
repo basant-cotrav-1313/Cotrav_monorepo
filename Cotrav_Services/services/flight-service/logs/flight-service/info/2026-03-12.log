@@ -1,0 +1,14 @@
+{"level":30,"time":"2026-03-12T08:25:20.892Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T08:25:20.895Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T08:30:30.333Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T08:30:30.336Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T08:30:46.463Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T08:30:46.471Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T08:31:32.490Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T08:31:32.493Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T10:10:19.698Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T10:10:19.704Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T10:11:57.098Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T10:11:57.102Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}
+{"level":30,"time":"2026-03-12T11:04:08.978Z","service":"flight-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-12T11:04:08.986Z","service":"flight-service","env":"development","port":"4002","service":"flight-service","msg":"Flight service listening"}

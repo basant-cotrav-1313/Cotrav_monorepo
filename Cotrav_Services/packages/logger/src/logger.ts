@@ -1,24 +1,31 @@
 // src/infrastructure/logger/logger.ts
-import pino, { Logger } from "pino";
+import pino, { Logger, Level } from "pino";
+import pretty from "pino-pretty";
 import { streams } from "./streams";
 
-const isDev = process.env.NODE_ENV === "production";
+const isDev = process.env.NODE_ENV === "development";
+const logLevel = (process.env.LOG_LEVEL || "info") as Level;
+
+const allStreams = isDev
+  ? [
+      ...streams,
+      {
+        level: logLevel,
+        stream: pretty({ colorize: true, sync: true })
+      }
+    ]
+  : streams;
 
 const logger: Logger = pino(
   {
-    level: process.env.LOG_LEVEL || "info",
+    level: logLevel,
     base: {
       service: process.env.SERVICE_NAME || "auth-service",
       env: process.env.NODE_ENV || "development"
     },
     timestamp: pino.stdTimeFunctions.isoTime
   },
-  isDev
-    ? pino.transport({
-        target: "pino-pretty",
-        options: { colorize: true }
-      })
-    : pino.multistream(streams)
+  pino.multistream(allStreams)
 );
 
 export default logger;

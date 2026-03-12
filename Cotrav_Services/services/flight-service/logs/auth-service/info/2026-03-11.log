@@ -1,2 +1,0 @@
-{"level":30,"time":"2026-03-11T11:29:01.352Z","service":"auth-service","env":"test","layer":"repository","fn":"getCompanies","count":2,"msg":"Companies fetched successfully"}
-{"level":30,"time":"2026-03-11T11:29:01.360Z","service":"auth-service","env":"test","layer":"repository","fn":"getCompanies","count":0,"msg":"Companies fetched successfully"}

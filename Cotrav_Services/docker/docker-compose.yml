@@ -27,3 +27,5 @@ services:
       - "4002:4002"
     env_file:
       - ../services/flight-service/.env
+    environment:
+      NODE_ENV: production
