@@ -10,3 +10,6 @@ export { default as OpsMgmtProfilePage } from "./Profile";
 export { default as OpsMgmtAdvancedSearchResultsPage } from "./AdvancedSearchResults";
 export { default as OpsMgmtBillsDashboardPage } from "./BillsDashboard";
 export { default as OpsMgmtVoucherDashboardPage } from "./VoucherDashboard";
+export { default as OpsMgmtUserManagementDashboardPage } from "./UserManagementDashboard";
+export { default as OpsMgmtUserImportPage } from "./UserImport";
+

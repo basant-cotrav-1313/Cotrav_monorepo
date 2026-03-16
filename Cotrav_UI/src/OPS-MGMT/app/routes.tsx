@@ -12,7 +12,9 @@ import {
   OpsMgmtProfilePage,
   OpsMgmtTaxiDashboardPage,
   OpsMgmtTrainDashboardPage,
-  OpsMgmtVoucherDashboardPage
+  OpsMgmtVoucherDashboardPage,
+  OpsMgmtUserManagementDashboardPage,
+  OpsMgmtUserImportPage
 } from "@/OPS-MGMT/pages";
 
 export type OpsMgmtRoute = {
@@ -32,5 +34,7 @@ export const opsMgmtRoutes: OpsMgmtRoute[] = [
   { path: "/ops-mgmt/profile", element: <OpsMgmtProfilePage /> },
   { path: "/ops-mgmt/advanced-search-results", element: <OpsMgmtAdvancedSearchResultsPage /> },
   { path: "/ops-mgmt/bills-dashboard", element: <OpsMgmtBillsDashboardPage /> },
-  { path: "/ops-mgmt/voucher-dashboard", element: <OpsMgmtVoucherDashboardPage /> }
+  { path: "/ops-mgmt/voucher-dashboard", element: <OpsMgmtVoucherDashboardPage /> },
+  { path: "/ops-mgmt/user-management-dashboard", element: <OpsMgmtUserManagementDashboardPage /> },
+  { path: "/ops-mgmt/user-import", element: <OpsMgmtUserImportPage /> }
 ];
