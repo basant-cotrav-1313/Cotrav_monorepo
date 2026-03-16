@@ -129,6 +129,11 @@ const VOUCHER_LINKS: NavLink[] = [
   { label: "Vouchers Dashboard", href: "/ops-mgmt/voucher-dashboard", internal: true }
 ];
 
+const USER_MANAGEMENT_LINKS: NavLink[] = [
+  { label: "User Dashboard", href: "/ops-mgmt/user-management-dashboard", internal: true },
+  { label: "User Import", href: "/ops-mgmt/user-import", internal: true }
+];
+
 const NAV_MENUS: NavMenu[] = [
   {
     label: "Companies",
@@ -189,7 +194,12 @@ const NAV_MENUS: NavMenu[] = [
     label: "Water Bottles",
     sections: [{ label: "Water Bottles", links: WATER_BOTTLE_LINKS }]
   },
-  {
+    {
+    label: "User Management",
+    dashboardPath: "/ops-mgmt/user-management-dashboard",
+    sections: [{ label: "User Management", links: USER_MANAGEMENT_LINKS }]
+  },
+{
     label: "Finance",
     dashboardPath: "/ops-mgmt/voucher-dashboard",
     sections: [
@@ -492,3 +502,7 @@ const OpsTopNav: React.FC<OpsTopNavProps> = ({ pageTitle, pageSubtitle }) => {
 };
 
 export default OpsTopNav;
+
+
+
+

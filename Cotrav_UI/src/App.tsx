@@ -1,66 +1,9 @@
-
-// import React from 'react';
-// import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-// import Home from './Homepage/Home'
-// import MainLayout from './Layouts/mainlayout';
-// import { pages, MapProvider } from '.'; // Import MapProvider
-
-// const App: React.FC = () => {
-//   return (
-//     <MapProvider> {/* Wrap BrowserRouter with MapProvider */}
-//       <BrowserRouter>
-//         <Routes>
-
-//           <Route element={<MainLayout />}>
-          
-//           {/* Home/Landing Page */}
-//           <Route path="/" element={<Home />} />
-
-//           {/* Bootstrap route - handles ?taxivaxidata=... */}
-//           <Route path="/HotelSearch" element={<pages.HotelSearchBootstrap />} />
-          
-//           {/* Main search results page */}
-//           <Route path="/hotel-search" element={<pages.HotelSearchPage />} />
-          
-//           {/* Hotel detail page */}
-//           <Route path="/HotelDetail" element={<pages.HotelDetailPage />} />
-
-//           {/* Hotel booking page */}
-//           <Route path="/HotelBooking" element={<pages.HotelBookingPage />} />
-
-//           {/* Payment page (if payment required) */}
-//           {/* <Route path="/HotelPayment" element={<pages.HotelPayment />} /> */}
-
-//           {/* Booking completed page */}
-//           <Route path="/HotelBookingCompleted" element={<pages.HotelBookingCompletedPage />} />
-
-//           {/* Cancellation page */}
-//           {/* <Route path="/HotelCancellation" element={<pages.HotelCancellation />} /> */}
-
-//           {/* Booking done/confirmation page */}
-//           {/* <Route path="/BookingDone" element={<pages.BookingDone />} /> */}
-
-//           </Route>
-
-          
-//           {/* 404 fallback - redirect to home */}
-//           <Route path="*" element={<Navigate to="/" replace />} />
-//         </Routes>
-//       </BrowserRouter>
-//     </MapProvider>
-//   );
-// };
-
-// export default App;
-
-
-
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './Homepage/Home'
-import MainLayout from './Layouts/mainlayout';
-import { pages, opsMgmtPages, MapProvider } from '.'; // Import MapProvider
-import { clearOpsAuthSession, hasValidOpsSession } from './OPS-MGMT/auth/token';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./Homepage/Home";
+import MainLayout from "./Layouts/mainlayout";
+import { pages, opsMgmtPages, MapProvider } from ".";
+import { clearOpsAuthSession, hasValidOpsSession } from "./OPS-MGMT/auth/token";
 
 type ProtectedOpsRouteProps = {
   children: React.ReactElement;
@@ -81,28 +24,13 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-          
-            {/* Home/Landing Page */}
             <Route path="/" element={<Home />} />
-
-            {/* Bootstrap route - handles Search/Book ?taxivaxidata=... */}
             <Route path="/HotelSearch" element={<pages.HotelSearchBootstrap />} />
-            
-            {/* Book Now route - handles Book Now ?taxivaxidata=... */}
             <Route path="/HotelRoom" element={<pages.HotelRoomBootstrap />} />
-            
-            {/* Main search results page */}
             <Route path="/hotel-search" element={<pages.HotelSearchPage />} />
-            
-            {/* Hotel detail page */}
             <Route path="/HotelDetail" element={<pages.HotelDetailPage />} />
-
-            {/* Hotel booking page */}
             <Route path="/HotelBooking" element={<pages.HotelBookingPage />} />
-
-            {/* Booking completed page */}
             <Route path="/HotelBookingCompleted" element={<pages.HotelBookingCompletedPage />} />
-
           </Route>
 
           <Route path="/ops-mgmt/login" element={<opsMgmtPages.OpsMgmtLoginPage />} />
@@ -194,8 +122,23 @@ const App: React.FC = () => {
               </ProtectedOpsRoute>
             }
           />
+          <Route
+            path="/ops-mgmt/user-management-dashboard"
+            element={
+              <ProtectedOpsRoute>
+                <opsMgmtPages.OpsMgmtUserManagementDashboardPage />
+              </ProtectedOpsRoute>
+            }
+          />
 
-          {/* 404 fallback - redirect to home */}
+          <Route
+            path="/ops-mgmt/user-import"
+            element={
+              <ProtectedOpsRoute>
+                <opsMgmtPages.OpsMgmtUserImportPage />
+              </ProtectedOpsRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
@@ -204,3 +147,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
