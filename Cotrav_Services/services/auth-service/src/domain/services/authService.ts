@@ -131,6 +131,7 @@ export class AuthService {
         },
         body: params
       });
+      console.log("RESPONSE : ",response)
     } catch (error) {
       logger.error({ error }, "Failed to reach Keycloak");
       throw new InfraError("Unable to connect to Keycloak");
@@ -147,6 +148,7 @@ export class AuthService {
         "Keycloak rejected login request"
       );
 
+      console.log("RESPONSE : ",response)
       if (response.status === 400 || response.status === 401) {
         throw new AppError("Invalid credentials or OTP", "APP_ERROR", 401);
       }

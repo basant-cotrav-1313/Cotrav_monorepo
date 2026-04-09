@@ -10,7 +10,7 @@ const path_1 = __importDefault(require("path"));
  * Ensures log directory exists (mkdir -p)
  */
 function ensureLogDir(serviceName) {
-    const baseDir = process.env.LOG_DIR ?? "./logs";
+    const baseDir = process.env.LOG_BASE_DIR ?? process.env.LOG_DIR ?? "./logs";
     const resolvedBaseDir = path_1.default.resolve(baseDir);
     const serviceDir = path_1.default.join(resolvedBaseDir, serviceName);
     fs_1.default.mkdirSync(serviceDir, { recursive: true });

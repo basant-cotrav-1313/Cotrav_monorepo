@@ -11,6 +11,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  
   server: {
     host: 'localhost',
     port: 5173,
@@ -34,6 +35,13 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path,
       },
+
+      "/api": {
+        target: "http://192.168.1.57",
+        changeOrigin: true,
+        rewrite: (path) => path, // keeps /api/... as-is
+      },
+
     },
   },
 
@@ -47,6 +55,7 @@ export default defineConfig({
     },
   },
 
+  
   //  test: {
   //   globals: true,
   //   environment: 'jsdom',

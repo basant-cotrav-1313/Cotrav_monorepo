@@ -1,0 +1,2 @@
+{"level":30,"time":"2026-03-16T07:48:11.399Z","service":"hotel-service","env":"development","msg":"Database connection successful"}
+{"level":30,"time":"2026-03-16T07:48:11.417Z","service":"hotel-service","env":"development","port":"4003","service":"hotel-service","msg":"Hotel service listening"}

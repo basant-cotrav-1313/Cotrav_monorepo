@@ -1,0 +1,5 @@
+{"level":30,"time":"2026-03-17T07:59:36.717Z","service":"auth-service","env":"development","port":4001,"service":"auth-service","msg":"Auth service listening"}
+{"level":30,"time":"2026-03-17T08:00:02.117Z","service":"auth-service","env":"development","port":4001,"service":"auth-service","msg":"Auth service listening"}
+{"level":30,"time":"2026-03-17T08:03:36.406Z","service":"auth-service","env":"development","port":4001,"service":"auth-service","msg":"Auth service listening"}
+{"level":30,"time":"2026-03-17T08:04:03.815Z","service":"auth-service","env":"development","path":"/login","username":"basant.bhagat@cotrav.co","msg":"Login request received"}
+{"level":30,"time":"2026-03-17T08:04:03.817Z","service":"auth-service","env":"development","username":"basant.bhagat@cotrav.co","realm":"cotrav-OPS","tokenEndpoint":"http://localhost:8080/realms/cotrav-OPS/protocol/openid-connect/token","otpProvided":false,"msg":"Authenticating user via Keycloak"}

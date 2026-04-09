@@ -89,6 +89,7 @@ class AuthService {
                 },
                 body: params
             });
+            console.log("RESPONSE : ", response);
         }
         catch (error) {
             logger_1.default.error({ error }, "Failed to reach Keycloak");
@@ -101,6 +102,7 @@ class AuthService {
                 username,
                 errorBody
             }, "Keycloak rejected login request");
+            console.log("RESPONSE : ", response);
             if (response.status === 400 || response.status === 401) {
                 throw new errors_1.AppError("Invalid credentials or OTP", "APP_ERROR", 401);
             }

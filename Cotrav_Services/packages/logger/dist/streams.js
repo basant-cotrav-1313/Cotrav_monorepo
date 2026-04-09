@@ -11,10 +11,11 @@ const LEVEL_NUMBERS = {
     trace: 10, debug: 20, info: 30, warn: 40, error: 50, fatal: 60
 };
 const serviceName = process.env.SERVICE_NAME || "auth-service";
-const baseLogDir = path_1.default.resolve(process.env.LOG_DIR || path_1.default.join(process.cwd(), "logs"));
+const baseLogDir = path_1.default.resolve(process.env.LOG_BASE_DIR || process.env.LOG_DIR || path_1.default.join(process.cwd(), "logs"));
+const serviceLogDir = path_1.default.join(baseLogDir, serviceName);
 const logPaths = {};
 ["debug", "info", "warn", "error"].forEach((level) => {
-    const logDir = path_1.default.join(baseLogDir, serviceName, level);
+    const logDir = path_1.default.join(serviceLogDir, level);
     fs_1.default.mkdirSync(logDir, { recursive: true });
     logPaths[level] = path_1.default.join(logDir, `${new Date().toISOString().slice(0, 10)}.log`);
 });

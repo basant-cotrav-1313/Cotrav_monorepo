@@ -12,4 +12,6 @@ export { default as OpsMgmtBillsDashboardPage } from "./BillsDashboard";
 export { default as OpsMgmtVoucherDashboardPage } from "./VoucherDashboard";
 export { default as OpsMgmtUserManagementDashboardPage } from "./UserManagementDashboard";
 export { default as OpsMgmtUserImportPage } from "./UserImport";
+export {default as CreateUserPage} from './AddUser'
+export {default as SetPasswordPage} from './PasswordSet'
 

@@ -139,6 +139,16 @@ const App: React.FC = () => {
               </ProtectedOpsRoute>
             }
           />
+
+          <Route
+  path="/ops-mgmt/add-user"
+  element={
+    <ProtectedOpsRoute>
+      <opsMgmtPages.CreateUserPage />
+    </ProtectedOpsRoute>
+  }
+/>
+          <Route path="/auth/set-password" element={<opsMgmtPages.SetPasswordPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

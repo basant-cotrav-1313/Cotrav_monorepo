@@ -8,12 +8,15 @@ const LEVEL_NUMBERS: Record<string, number> = {
 };
 
 const serviceName = process.env.SERVICE_NAME || "auth-service";
-const baseLogDir = path.resolve(process.env.LOG_DIR || path.join(process.cwd(), "logs"));
+const baseLogDir = path.resolve(
+  process.env.LOG_BASE_DIR || process.env.LOG_DIR || path.join(process.cwd(), "logs")
+);
+const serviceLogDir = path.join(baseLogDir, serviceName);
 
 const logPaths: Record<string, string> = {};
 
 (["debug", "info", "warn", "error"] as Level[]).forEach((level) => {
-  const logDir = path.join(baseLogDir, serviceName, level);
+  const logDir = path.join(serviceLogDir, level);
   fs.mkdirSync(logDir, { recursive: true });
   logPaths[level] = path.join(logDir, `${new Date().toISOString().slice(0, 10)}.log`);
 });

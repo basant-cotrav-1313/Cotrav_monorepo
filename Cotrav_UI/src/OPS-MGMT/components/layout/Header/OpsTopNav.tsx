@@ -131,7 +131,8 @@ const VOUCHER_LINKS: NavLink[] = [
 
 const USER_MANAGEMENT_LINKS: NavLink[] = [
   { label: "User Dashboard", href: "/ops-mgmt/user-management-dashboard", internal: true },
-  { label: "User Import", href: "/ops-mgmt/user-import", internal: true }
+  { label: "User Import", href: "/ops-mgmt/user-import", internal: true },
+  { label: "Add User", href: "/ops-mgmt/add-user", internal: true }
 ];
 
 const NAV_MENUS: NavMenu[] = [
