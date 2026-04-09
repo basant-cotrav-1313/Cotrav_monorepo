@@ -3,7 +3,7 @@ import logo from "../assets/images/Cotrav_Logo.png";
 import eamil from "../assets/images/Email.png";
 import phone from "../assets/images/Phone.png";
 import location from "../assets/images/Location_123.png";
-import facebook from "../assets/images/Facebook.png";
+import facebook from "../assets/images/FaceBook.png";
 import instagram from "../assets/images/Instagram.png";
 import angel from "../assets/images/angel.png"
 import Thread from "../assets/images/Thread.png"
