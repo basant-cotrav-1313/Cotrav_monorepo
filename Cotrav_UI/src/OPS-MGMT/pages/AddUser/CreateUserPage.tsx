@@ -1590,54 +1590,114 @@ const handleSave = async () => {
                         ))}
                         <div style={{ marginTop: "10px", padding: "7px 11px", borderRadius: "8px", background: brandFaint, display: "flex", alignItems: "center", gap: "7px" }}>
                           <ShieldCheck size={12} color={brand} />
-                          <span style={{ fontSize: "11px", fontWeight: 600, color: brand }}>{checkedPerms.size} permissions assigned</span>
+                          {/* <span style={{ fontSize: "11px", fontWeight: 600, color: brand }}>{checkedPerms.size} permissions assigned</span> */}
+
+
+<span style={{ fontSize: "11px", fontWeight: 600, color: brand }}>{buildPermissionPayload().length} access rights assigned</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Permissions by module */}
-                    <div>
-                      <p style={{ margin: "0 0 10px", fontSize: "11px", fontWeight: 700, color: "#8B8FA8", textTransform: "uppercase", letterSpacing: "0.07em" }}>
-                        Permissions by module
-                      </p>
-                      {checkedPerms.size === 0 ? (
-                        <div style={{ padding: "28px", border: `1px dashed ${brandMid}`, borderRadius: "12px", textAlign: "center" }}>
-                          <ShieldCheck size={26} color="#D1D5DB" style={{ margin: "0 auto 8px" }} />
-                          <p style={{ margin: 0, fontSize: "13px", color: "#9CA3AF" }}>No permissions selected</p>
-                        </div>
-                      ) : (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                          {modules.map(mod => {
-                            const modPerms = SUB_ROLES.flatMap(sr => rolesData[mod]?.[sr] ?? []).filter(p => checkedPerms.has(p));
-                            if (modPerms.length === 0) return null;
-                            return (
-                              <div key={mod} style={{ borderRadius: "11px", border: `1px solid ${brandLight}`, overflow: "hidden" }}>
-                                <div style={{ padding: "9px 13px", background: brandFaint, display: "flex", alignItems: "center", gap: "8px", borderBottom: `1px solid ${brandLight}` }}>
-                                  <div style={{ width: "24px", height: "24px", borderRadius: "6px", background: brandLight, border: `1px solid ${brandMid}`, display: "flex", alignItems: "center", justifyContent: "center", color: brand }}>
-                                    {MODULE_ICON[mod] ?? <LayoutGrid size={12} />}
-                                  </div>
-                                  <span style={{ fontSize: "12px", fontWeight: 700, color: brand }}>{mod}</span>
-                                  <span style={{ marginLeft: "auto", fontSize: "10px", fontWeight: 700, padding: "2px 7px", borderRadius: "99px", background: brand, color: "#fff" }}>
-                                    {modPerms.length}
-                                  </span>
-                                </div>
-                                <div style={{ padding: "9px 13px", display: "flex", flexWrap: "wrap", gap: "5px" }}>
-                                  {modPerms.map(p => {
-                                    const sr = (Object.entries(rolesData[mod]) as [SubRole, string[]][]).find(([, ps]) => ps.includes(p))?.[0] ?? "Basic";
-                                    const c  = SR[sr];
-                                    return (
-                                      <span key={p} style={{ fontSize: "11px", padding: "3px 8px", borderRadius: "99px", background: c.bg, color: c.text, border: `1px solid ${c.border}`, fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
-                                        {fmt(p)}
-                                      </span>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
+                    {/* Permissions by module */}
+<div>
+  <p style={{ margin: "0 0 10px", fontSize: "11px", fontWeight: 700, color: "#8B8FA8", textTransform: "uppercase", letterSpacing: "0.07em" }}>
+    Access Summary
+  </p>
+  {checkedPerms.size === 0 ? (
+    <div style={{ padding: "28px", border: `1px dashed ${brandMid}`, borderRadius: "12px", textAlign: "center" }}>
+      <ShieldCheck size={26} color="#D1D5DB" style={{ margin: "0 auto 8px" }} />
+      <p style={{ margin: 0, fontSize: "13px", color: "#9CA3AF" }}>No permissions selected</p>
+    </div>
+  ) : (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      {modules.map(mod => {
+        // For each sub-role, determine if it's a full role or partial perms
+        const roleKeys: string[]   = [];
+        const individualPerms: { perm: string; sr: SubRole }[] = [];
+
+        SUB_ROLES.filter(sr => sr !== "Admin").forEach(sr => {
+          const perms      = rolesData[mod]?.[sr] ?? [];
+          if (perms.length === 0) return;
+          const checkedInSR = perms.filter(p => checkedPerms.has(p));
+          if (checkedInSR.length === 0) return;
+
+          if (checkedInSR.length === perms.length) {
+            roleKeys.push(`${mod.toLowerCase()}-${sr.toLowerCase()}`);
+          } else {
+            checkedInSR.forEach(p => individualPerms.push({ perm: p, sr }));
+          }
+        });
+
+        if (roleKeys.length === 0 && individualPerms.length === 0) return null;
+
+        return (
+          <div key={mod} style={{ borderRadius: "11px", border: `1px solid ${brandLight}`, overflow: "hidden" }}>
+
+            {/* Module header */}
+            <div style={{ padding: "9px 13px", background: brandFaint, display: "flex", alignItems: "center", gap: "8px", borderBottom: `1px solid ${brandLight}` }}>
+              <div style={{ width: "24px", height: "24px", borderRadius: "6px", background: brandLight, border: `1px solid ${brandMid}`, display: "flex", alignItems: "center", justifyContent: "center", color: brand }}>
+                {MODULE_ICON[mod] ?? <LayoutGrid size={12} />}
+              </div>
+              <span style={{ fontSize: "12px", fontWeight: 700, color: brand }}>{mod}</span>
+              <span style={{ marginLeft: "auto", fontSize: "10px", fontWeight: 700, padding: "2px 7px", borderRadius: "99px", background: brand, color: "#fff" }}>
+                {roleKeys.length + individualPerms.length}
+              </span>
+            </div>
+
+            <div style={{ padding: "10px 13px", display: "flex", flexDirection: "column", gap: "8px" }}>
+
+              {/* Roles row */}
+              {roleKeys.length > 0 && (
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#8B8FA8", textTransform: "uppercase", letterSpacing: "0.06em", paddingTop: "4px", minWidth: "70px" }}>
+                    Roles
+                  </span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                    {roleKeys.map(role => (
+                      <span key={role} style={{
+                        fontSize: "11px", padding: "3px 9px", borderRadius: "99px",
+                        background: brand, color: "#fff",
+                        fontFamily: "'JetBrains Mono', monospace", fontWeight: 600,
+                        display: "flex", alignItems: "center", gap: "4px",
+                      }}>
+                        <Crown size={9} /> {role}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Individual permissions row */}
+              {individualPerms.length > 0 && (
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#8B8FA8", textTransform: "uppercase", letterSpacing: "0.06em", paddingTop: "4px", minWidth: "70px" }}>
+                    Permissions
+                  </span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                    {individualPerms.map(({ perm, sr }) => {
+                      const c = SR[sr];
+                      return (
+                        <span key={perm} style={{
+                          fontSize: "11px", padding: "3px 8px", borderRadius: "99px",
+                          background: c.bg, color: c.text, border: `1px solid ${c.border}`,
+                          fontFamily: "'JetBrains Mono', monospace", fontWeight: 500,
+                        }}>
+                          {fmt(perm)}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+</div>
                   </div>
                 </div>
 
