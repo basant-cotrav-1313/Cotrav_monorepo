@@ -505,7 +505,8 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 // ─── API layer ────────────────────────────────────────────────────────────────
-const BASE_URL = "/api/user_management";
+// const BASE_URL = "/api/user_management";
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/user_management`;
 
 export interface VerifyTokenResponse {
   valid: boolean;
