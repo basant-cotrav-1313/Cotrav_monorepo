@@ -502,37 +502,37 @@
 // };
 
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 // ─── API layer ────────────────────────────────────────────────────────────────
-// Replace these base URLs / field names with your actual endpoints
+const BASE_URL = "/api/user_management";
 
 export interface VerifyTokenResponse {
   valid: boolean;
-  message?: string;   // e.g. "Token expired", "Invalid token", "User not found"
-  code?: string;      // e.g. "TOKEN_EXPIRED" | "INVALID_TOKEN" | "USER_NOT_FOUND"
+  message?: string;
+  code?: string;
 }
 
 async function verifyToken(keycloak_id: string): Promise<VerifyTokenResponse> {
-  const res = await fetch(`/api/verify-token`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ keycloak_id }),
-  });
-  const data = await res.json();
-  // Pass the full response back so the UI can react to message/code
-  if (!res.ok) return { valid: false, message: data?.message, code: data?.code };
-  return data;
+  try {
+    const { data } = await axios.post<VerifyTokenResponse>(
+      `${BASE_URL}/verifyToken`,
+      { keycloak_id }
+    );
+    return data;
+  } catch (error: any) {
+    // axios puts the response body in error.response.data
+    const data = error?.response?.data;
+    return { valid: false, message: data?.message, code: data?.code };
+  }
 }
 
 async function setUserPasswordKeycloak(keycloak_id: string, password: string): Promise<void> {
-  const res = await fetch(`/api/set-password`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ keycloak_id, password }),
-  });
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    throw new Error(data?.message ?? "Failed to set password. Please try again.");
+  try {
+    await axios.post(`${BASE_URL}/setUserPasswordKeycloak`, { keycloak_id, password });
+  } catch (error: any) {
+    const message = error?.response?.data?.message ?? "Failed to set password. Please try again.";
+    throw new Error(message);
   }
 }
 // ─────────────────────────────────────────────────────────────────────────────
