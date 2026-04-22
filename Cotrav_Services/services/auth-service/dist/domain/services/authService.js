@@ -80,6 +80,8 @@ class AuthService {
             otpProvided: otpValues.length > 0,
             otpChannel: otpChannel ?? (mobileOtp ? "mobile" : emailOtp ? "email" : totpOtp ? "totp" : undefined)
         }, "Authenticating user via Keycloak");
+        console.log("tokenEndpoint:", tokenEndpoint); // ← add this
+        console.log("params:", params.toString()); // ← add this
         let response;
         try {
             response = await fetch(tokenEndpoint, {

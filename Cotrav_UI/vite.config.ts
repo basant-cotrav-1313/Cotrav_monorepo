@@ -38,7 +38,7 @@ export default defineConfig({
       },
 
       "/api": {
-        target: "http://192.168.1.57",
+        target: "http://localhost:5002",
         changeOrigin: true,
         rewrite: (path) => path, // keeps /api/... as-is
       },

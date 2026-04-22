@@ -13,7 +13,8 @@ services:
     env_file:
       - ../services/auth-service/.env
     environment:
-      KEYCLOAK_BASE_URL: http://host.docker.internal:8080
+      # KEYCLOAK_BASE_URL: http://host.docker.internal:8080
+      KEYCLOAK_BASE_URL: https://trialapp.in
       # KEYCLOAK_BASE_URL: http://keycloak:8080
 
   flight-service:

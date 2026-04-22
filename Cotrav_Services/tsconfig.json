@@ -4,6 +4,7 @@
     { "path": "packages/logger" },
     { "path": "packages/errors" },
     { "path": "packages/middlewares" },
-    { "path": "services/auth-service" }
+    { "path": "services/auth-service" },
+    { "path": "services/user-management-service" } 
   ]
 }

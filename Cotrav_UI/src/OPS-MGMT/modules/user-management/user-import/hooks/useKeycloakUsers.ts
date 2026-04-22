@@ -42,9 +42,70 @@
 //   return { users, isLoadingUsers, usersError, fetchUsers };
 // };
 
+
+// import { useState, useCallback, useEffect } from "react";
+// import axios, { AxiosError } from "axios";
+// import type { RealmTab, ImportedUser } from "../types/userImport.types"; // ← add RealmTab
+// import  * as userManagementApi  from "@/OPS-MGMT/api/userManagement";
+
+// interface KeycloakUsersApiResponse {
+//   success: string;
+//   error: string;
+//   response: {
+//     total_users: number;
+//     total_imported: number;
+//     total_duplicate: number;
+//     total_failed: number;
+//     users: ImportedUser[];
+//   };
+// }
+
+// const REALM_API: Record<RealmTab, string> = {
+//   ops: "/api/user_management/getAllKeycloakUsers",
+//   client: "/api/user_management/getAllKeycloakUsers", // ← replace when client API ready
+// };
+
+// export const useKeycloakUsers = (activeRealm: RealmTab) => { // ← accept activeRealm
+//   const [users, setUsers] = useState<ImportedUser[]>([]);
+//   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+//   const [usersError, setUsersError] = useState<string | null>(null);
+
+//   const fetchUsers = useCallback(async () => {
+//     console.log("fetchUsers called for realm:", activeRealm);
+//     setIsLoadingUsers(true);
+//     setUsersError(null);
+//     try {
+//       const { data } = await axios.get<KeycloakUsersApiResponse>(
+//         REALM_API[activeRealm] // ← use realm-specific URL
+//       );
+//       const tagged = data.response.users.map((u) => ({
+//         ...u,
+//         realm: activeRealm, // ← tag each user with current realm
+//       }));
+//       console.log("tagged users:", tagged.length, "realm:", activeRealm);
+//       setUsers(tagged);
+//     } catch (err) {
+//       const axiosError = err as AxiosError;
+//       setUsersError(axiosError.message || "Failed to fetch users");
+//     } finally {
+//       setIsLoadingUsers(false);
+//     }
+//   }, [activeRealm]); // ← re-fetch when realm changes
+
+//   useEffect(() => {
+//     fetchUsers();
+//   }, [fetchUsers]);
+
+//   return { users, isLoadingUsers, usersError, fetchUsers };
+// };
+
+
+
 import { useState, useCallback, useEffect } from "react";
-import axios, { AxiosError } from "axios";
-import type { RealmTab, ImportedUser } from "../types/userImport.types"; // ← add RealmTab
+// ← Remove: import axios, { AxiosError } from "axios";
+// ← Remove: REALM_API map
+import type { RealmTab, ImportedUser } from "../types/userImport.types";
+import * as userManagementApi from "@/OPS-MGMT/api/userManagement";
 
 interface KeycloakUsersApiResponse {
   success: string;
@@ -58,12 +119,7 @@ interface KeycloakUsersApiResponse {
   };
 }
 
-const REALM_API: Record<RealmTab, string> = {
-  ops: "/api/user_management/getAllKeycloakUsers",
-  client: "/api/user_management/getAllKeycloakUsers", // ← replace when client API ready
-};
-
-export const useKeycloakUsers = (activeRealm: RealmTab) => { // ← accept activeRealm
+export const useKeycloakUsers = (activeRealm: RealmTab) => {
   const [users, setUsers] = useState<ImportedUser[]>([]);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [usersError, setUsersError] = useState<string | null>(null);
@@ -73,22 +129,21 @@ export const useKeycloakUsers = (activeRealm: RealmTab) => { // ← accept activ
     setIsLoadingUsers(true);
     setUsersError(null);
     try {
-      const { data } = await axios.get<KeycloakUsersApiResponse>(
-        REALM_API[activeRealm] // ← use realm-specific URL
-      );
-      const tagged = data.response.users.map((u) => ({
+      // const { data } = await userManagementApi.getAllUsers(activeRealm); // ← pass realm
+      const { data } = await userManagementApi.getAllUsers();
+
+      const tagged = data.response.users.map((u: ImportedUser) => ({
         ...u,
-        realm: activeRealm, // ← tag each user with current realm
+        realm: activeRealm,
       }));
       console.log("tagged users:", tagged.length, "realm:", activeRealm);
       setUsers(tagged);
-    } catch (err) {
-      const axiosError = err as AxiosError;
-      setUsersError(axiosError.message || "Failed to fetch users");
+    } catch (err: any) {
+      setUsersError(err?.message || "Failed to fetch users");
     } finally {
       setIsLoadingUsers(false);
     }
-  }, [activeRealm]); // ← re-fetch when realm changes
+  }, [activeRealm]);
 
   useEffect(() => {
     fetchUsers();

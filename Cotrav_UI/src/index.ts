@@ -59,3 +59,5 @@ export { default as MapProvider } from './providers/MapProvider';
 
 // contants
 export * as constants from './hotel/constants/index'
+
+export * as userManagementApi from './OPS-MGMT/api/userManagement'
